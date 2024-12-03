@@ -1,0 +1,52 @@
+service: simple-project
+frameworkVersion: "3"
+package:
+  individually: true
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ${opt:region, 'ap-southeast-2'}
+  timeout: 20
+  vpc:
+    securityGroupIds:
+      - ${env:VPC_SECURITY_GROUP, ""}
+    subnetIds:
+      - ${env:VPC_SUBNET, ""}
+
+  environment:
+    LOG_LEVEL: debug
+    NODE_OPTIONS: --enable-source-maps
+    DB_NAME: ${env:DB_NAME, "simple-project"}
+    DB_CONNECTION_URI: ${env:DB_CONNECTION_URI, "mongodb://simple-project-mongodb:27017/"}
+    API_ENDPOINT: ${env:API_ENDPOINT, "http://0.0.0.0:3000"}
+    ENV: ${env:ENV, ""}
+    RELEASE: ${env:RELEASE, ""}
+
+functions:
+  initDB:
+    handler: src/handlers/db/initDB.handler
+    timeout: 300 # 5 minutes
+    environment:
+      LOG_LEVEL: debug
+      ENV: ${env:ENV, "local"}
+
+  helloWorld:
+    handler: src/handlers/api/helloWorld.handler
+    events:
+      - httpApi:
+          path: /hello
+          method: GET
+
+plugins:
+  - serverless-esbuild
+  - serverless-offline
+  - serverless-prune-plugin
+
+custom:
+  esbuild:
+    bundle: true
+    minify: false
+    sourcemap: true
+    concurrency: 1
+    zipConcurrency: 1

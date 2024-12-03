@@ -1,0 +1,13 @@
+# package directories
+node_modules
+.esbuild
+
+# Serverless directories
+.serverless
+
+# IDE
+.idea/
+.vscode/
+
+# Generated
+coverage

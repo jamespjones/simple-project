@@ -1,0 +1,22 @@
+{
+  /* Visit https://aka.ms/tsconfig.json to read more about this file */
+  "compilerOptions": {
+    "preserveConstEnums": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "target": "es2015",
+    "moduleResolution": "node",
+    "lib": ["es2015", "dom"],
+    "rootDir": "./",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "types": ["node", "jest"],
+    "resolveJsonModule": true,
+
+    /* We are using ESBuild plugin so that TSC should not emit code */
+    "noEmit": true
+  },
+  "include": ["src"],
+  "exclude": ["**/*.test.*", "**/__mocks__/*", "**/__tests__/*"]
+}
