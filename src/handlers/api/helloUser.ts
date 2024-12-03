@@ -7,10 +7,10 @@ import {serviceContainer} from "../../services/serviceContainer";
 
 const helloWorld: APIGatewayProxyHandlerV2<APIGatewayProxyStructuredResultV2> = async (event, context) => {
 
-  const user = await serviceContainer.cradle.userRepository.findUserById();
-  const message = `Welcome ${userName}`
+  // const user = await serviceContainer.cradle.userRepository.findUserById();
+  // const message = `Welcome ${userName}`
   const responsePayload = responsePayloadSchema.parse({
-    message,
+    message:"",
   });
 
   return apiGateway.create({

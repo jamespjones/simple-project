@@ -5,13 +5,14 @@ import {MongodbService} from "./mongodb/MongodbService";
 import {LoggerFactory} from "./logger/LoggerFactory";
 import {LoggerFactoryLocal} from "./logger/LoggerFactoryLocal";
 import {MongodbServiceLocal} from "./mongodb/MongodbServiceLocal";
+import {UserRepository} from "./repositories/UserRepository";
 
 export type ServiceContainerCradle = {
   configService: ConfigService;
   mongodbService: MongodbService;
   loggerFactory: LoggerFactory;
 
-  userService: UserService;
+  // userService: UserService;
 
   // Repositories
   userRepository: UserRepository;

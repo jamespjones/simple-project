@@ -3,7 +3,7 @@ import { ServiceContainerCradle } from "../serviceContainer";
 import { UserDTO } from "./UserDTO";
 import { UserEntity } from "./UserEntity";
 import { UserRepository } from "./UserRepository";
-import { UserUpdateDTO } from "./UserUpdateDTO";
+// import { UserUpdateDTO } from "./UserUpdateDTO";
 
 export class UserRepositoryImpl implements UserRepository {
   private readonly db: Db;
@@ -33,22 +33,22 @@ export class UserRepositoryImpl implements UserRepository {
     return this.getUsersCollection().find().map(UserDTO.convertFromEntity).toArray();
   }
 
-  public async updateUser(args: { userId: string; updateDTO: UserUpdateDTO }): Promise<UserDTO> {
-    const updateFields = UserUpdateDTO.convertToEntityUpdateFields(args.updateDTO);
-    const result = await this.getUsersCollection().findOneAndUpdate(
-      {
-        _id: new ObjectId(args.userId),
-      },
-      {
-        $set: { ...updateFields, updatedAt: new Date() },
-      },
-      { returnDocument: "after" }
-    );
-
-    if (!result.ok || !result.value) {
-      throw new Error(`Fail to update user, userId: ${args.userId}`);
-    }
-
-    return UserDTO.convertFromEntity(result.value);
-  }
+  // public async updateUser(args: { userId: string; updateDTO: UserUpdateDTO }): Promise<UserDTO> {
+  //   const updateFields = UserUpdateDTO.convertToEntityUpdateFields(args.updateDTO);
+  //   const result = await this.getUsersCollection().findOneAndUpdate(
+  //     {
+  //       _id: new ObjectId(args.userId),
+  //     },
+  //     {
+  //       $set: { ...updateFields, updatedAt: new Date() },
+  //     },
+  //     { returnDocument: "after" }
+  //   );
+  //
+  //   if (!result.ok || !result.value) {
+  //     throw new Error(`Fail to update user, userId: ${args.userId}`);
+  //   }
+  //
+  //   return UserDTO.convertFromEntity(result.value);
+  // }
 }

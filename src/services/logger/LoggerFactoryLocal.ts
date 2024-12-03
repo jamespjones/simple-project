@@ -1,4 +1,3 @@
-import _ from "lodash";
 import { Format } from "logform";
 import path from "path";
 import winston from "winston";
