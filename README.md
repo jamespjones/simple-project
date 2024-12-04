@@ -27,7 +27,14 @@ A serverless Node.js/TypeScript project using AWS Lambda and API Gateway.
 
 2. Run locally:
    ```bash
-   npm run dev
+   # Start MongoDB
+   npm run offline:mongodb:start
+
+   # Initialize the database
+   npm run offline:db:init
+
+   # Start the server
+   npm run offline:server:start
    ```
 
 3. Deploy to AWS:
@@ -45,7 +52,9 @@ A serverless Node.js/TypeScript project using AWS Lambda and API Gateway.
 ## Available Scripts
 
 - `npm run build`: Compile TypeScript to JavaScript
-- `npm run dev`: Run the service locally
+- `npm run offline:mongodb:start`: Start the MongoDB server locally
+- `npm run offline:db:init`: Initialize the database with required data
+- `npm run offline:server:start`: Start the local development server
 - `npm run deploy`: Deploy to AWS
 - `npm run test`: Run tests (if configured)
 
