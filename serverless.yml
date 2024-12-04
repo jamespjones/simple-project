@@ -38,6 +38,13 @@ functions:
           path: /hello
           method: GET
 
+  helloUser:
+    handler: src/handlers/api/helloUser.handler
+    events:
+      - httpApi:
+          path: /hello/{user_id}
+          method: GET
+
 plugins:
   - serverless-esbuild
   - serverless-offline

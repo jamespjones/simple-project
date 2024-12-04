@@ -4,13 +4,22 @@ import { APIGatewayProxyStructuredResultV2 } from "aws-lambda/trigger/api-gatewa
 import { httpErrorMiddleware } from "./httpErrorMiddleware";
 import {apiGateway} from "./apiGateway";
 import {serviceContainer} from "../../services/serviceContainer";
+import {ObjectId} from "mongodb";
+import {BadRequest} from "http-errors";
 
 const helloWorld: APIGatewayProxyHandlerV2<APIGatewayProxyStructuredResultV2> = async (event, context) => {
+  let pathParameters: z.infer<typeof requestPathParamsSchema>;
 
-  // const user = await serviceContainer.cradle.userRepository.findUserById();
-  // const message = `Welcome ${userName}`
+  try {
+    pathParameters = requestPathParamsSchema.parse(event.pathParameters);
+  } catch (e) {
+    throw new BadRequest(e.message || "Invalid parameter");
+  }
+
+  const user = await serviceContainer.cradle.userRepository.findUserById(pathParameters.user_id);
+  const message = `Welcome ${user?.name || "unknown"}!`
   const responsePayload = responsePayloadSchema.parse({
-    message:"",
+    message,
   });
 
   return apiGateway.create({
@@ -18,6 +27,11 @@ const helloWorld: APIGatewayProxyHandlerV2<APIGatewayProxyStructuredResultV2> = 
     payload: responsePayload,
   });
 };
+
+export const requestPathParamsSchema = z.object({
+  user_id: z.string().refine((idStr) => ObjectId.isValid(idStr), "Invalid User Id")
+});
+
 
 export const responsePayloadSchema = z.object({
   message: z.string(),

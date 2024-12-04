@@ -6,6 +6,7 @@ import {LoggerFactory} from "./logger/LoggerFactory";
 import {LoggerFactoryLocal} from "./logger/LoggerFactoryLocal";
 import {MongodbServiceLocal} from "./mongodb/MongodbServiceLocal";
 import {UserRepository} from "./repositories/UserRepository";
+import {UserRepositoryImpl} from "./repositories/UserRepositoryImpl";
 
 export type ServiceContainerCradle = {
   configService: ConfigService;
@@ -27,7 +28,7 @@ serviceContainer.register({ loggerFactory: awilix.asClass(LoggerFactoryLocal).si
 serviceContainer.register({ mongodbService: awilix.asClass(MongodbServiceLocal).singleton() });
 
 // serviceContainer.register({ userService: awilix.asClass(UserServiceImpl) });
-// serviceContainer.register({ userRepository: awilix.asClass(UserRepositoryImpl) });
+serviceContainer.register({ userRepository: awilix.asClass(UserRepositoryImpl) });
 
 
 export { serviceContainer };
