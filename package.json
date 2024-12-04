@@ -2,7 +2,7 @@
   "name": "simple-project",
   "scripts": {
     "test": "jest",
-    "offline:server:start": "serverless offline --stage local --region ap-southeast-2 --ignoreJWTSignature --noAuth --host 0.0.0.0 --reloadHandler --verbose",
+    "offline:server:start": "serverless offline --stage local --region ap-southeast-2 --ignoreJWTSignature --noAuth --host 0.0.0.0 --httpPort 3100 --reloadHandler --verbose",
     "offline:mongodb:start": "docker run --rm -d -p 27017:27017 --name local-mongodb mongo:5.0.18",
     "offline:db:init": "tsx ./src/tools/db/init-db.ts",
     "offline:mongodb:stop": "docker stop local-mongodb",

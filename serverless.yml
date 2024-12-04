@@ -19,7 +19,7 @@ provider:
     NODE_OPTIONS: --enable-source-maps
     DB_NAME: ${env:DB_NAME, "simple-project"}
     DB_CONNECTION_URI: ${env:DB_CONNECTION_URI, "mongodb://simple-project-mongodb:27017/"}
-    API_ENDPOINT: ${env:API_ENDPOINT, "http://0.0.0.0:3000"}
+    API_ENDPOINT: ${env:API_ENDPOINT, "http://0.0.0.0:3100"}
     ENV: ${env:ENV, ""}
     RELEASE: ${env:RELEASE, ""}
 
