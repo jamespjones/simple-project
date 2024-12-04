@@ -25,7 +25,7 @@ const main = () => {
   const generator = new OpenApiGeneratorV3(registry.definitions);
   const generatedDocument = generator.generateDocument(getOpenApiConfig());
 
-  fs.writeFileSync(path.join(__dirname, "../../api/openapi.json"), JSON.stringify(generatedDocument, null, 2));
+  fs.writeFileSync(path.join(__dirname, "../api/openapi.json"), JSON.stringify(generatedDocument, null, 2));
 };
 
 const getOpenApiConfig = (): OpenAPIObjectConfig => {

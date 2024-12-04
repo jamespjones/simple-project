@@ -24,9 +24,9 @@ export class LoggerFactoryLocal extends LoggerFactoryCloud {
       format.label({ label }),
       format.splat(),
       format.printf((info) => {
-        const message = info.message.replaceAll("\\n", "\n");
+        // const message = info.message.replaceAll("\\n", "\n");
 
-        return `[${info.level}] ${info.timestamp} ${info.label}: ${message}`;
+        return `[${info.level}] ${info.timestamp} ${info.label}: ${info.message}`;
       })
     );
   }
